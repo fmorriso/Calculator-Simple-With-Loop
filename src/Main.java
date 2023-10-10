@@ -47,11 +47,11 @@ public class Main
      */
     private static void performOneCalculation()
     {
-        double a = getNumber("Enter the first number ");
-        double b = getNumber("Enter the second number ");
+        double a = promptForNumber("Enter the first number >");
+        double b = promptForNumber("Enter the second number >");
         String operation = getOperation();
         double result = performOperation(a, b, operation);
-        System.out.println("result of " + a + " " + operation + " " + b + " = " + result);
+        System.out.format("result of %.2f %s %.2f = %.2f%n", a, operation, b, result);
     }
 
     /**
@@ -79,11 +79,11 @@ public class Main
      *            is prompted again.
      * @return - the double precision number.
      */
-    private static double getNumber(String msg)
+    private static double promptForNumber(String msg)
     {
         Scanner kb = new Scanner(System.in);
         double num = Double.NaN;
-        System.out.println(msg);
+        System.out.print(msg);
         boolean needValidNumber = true;
         do
         {
@@ -116,7 +116,7 @@ public class Main
         System.out.println("Valid operations are " + validOperations);
         do
         {
-            System.out.println("What operation do you wnat to perform?");
+            System.out.print("What operation do you want to perform?>");
             operation = kb.nextLine();
             if (validOperations.indexOf(operation) >= 0)
                 waitingForValidOperation = false;
