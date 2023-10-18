@@ -60,7 +60,7 @@ public class Main
      * @param a         - the first double precision number involved in the operation.
      * @param b         - the second double precision number involved in the operation.
      * @param operation - the type of operation such as + (addition), - (subtraction)
-     *                  / (multiplication), or % (modulo).
+     *                  * (multiplication), / (division) or % (modulo).
      * @return
      */
     private static double performOperation(double a, double b, String operation)
