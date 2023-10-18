@@ -23,22 +23,36 @@ public class Main
     {
         Scanner kb = new Scanner(System.in);
         boolean awaitingValidResponse = true;
+        boolean result = false;
         while (awaitingValidResponse)
         {
             System.out.print("Do you want to make another calculation (y/n or press Enter key for yes)?>");
             String response = kb.nextLine();
             // no response at all is the same as Yes
-            if (response.length() == 0) return true;
+            if (response.length() == 0) 
+            {
+                result = true;
+                awaitingValidResponse = false;
+                continue;
+            }
             // trim response to a single, lowercase value
             response = response.trim().substring(0, 1).toLowerCase();
             // all we want is just y or n
-            if (response.equals("n")) return false;
-            if (response.equals("y")) return true;
+            if (response.equals("n")) {
+                result = false;
+                awaitingValidResponse = false;
+                continue;
+            }
+            if (response.equals("y")) {
+                result = true;
+                awaitingValidResponse = false;
+                continue;
+            }
             // if we get this far, the user did not give us a proper response,
             // so let them know and ask again.
             System.out.println("Invalid response. Try again.");
-        }
-        return false;
+        }        
+        return result;
     }
 
     /**
