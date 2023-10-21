@@ -1,13 +1,11 @@
 import java.util.Scanner;
 
-public class Main
-{
-    public static void main(String[] args)
-    {
+public class Main {
+    public static void main(String[] args) {
+
         displayJavaVersion();
         boolean keepCalculating = true;
-        while (keepCalculating)
-        {
+        while (keepCalculating) {
             performOneCalculation();
             keepCalculating = askIfWeShouldContinueCalculating();
         }
@@ -17,20 +15,18 @@ public class Main
     /**
      * Asks the user if they want to continue calculating.
      *
-     * @return - true if the user wants to continue calculating; otherwise, returns false.
+     * @return - true if the user wants to continue calculating; otherwise, returns
+     *         false.
      */
-    private static boolean askIfWeShouldContinueCalculating()
-    {
+    private static boolean askIfWeShouldContinueCalculating() {
         Scanner kb = new Scanner(System.in);
         boolean awaitingValidResponse = true;
         boolean result = false;
-        while (awaitingValidResponse)
-        {
+        while (awaitingValidResponse) {
             System.out.print("Do you want to make another calculation (y/n or press Enter key for yes)?>");
             String response = kb.nextLine();
             // no response at all is the same as Yes
-            if (response.length() == 0) 
-            {
+            if (response.length() == 0) {
                 result = true;
                 awaitingValidResponse = false;
                 continue;
@@ -51,16 +47,17 @@ public class Main
             // if we get this far, the user did not give us a proper response,
             // so let them know and ask again.
             System.out.println("Invalid response. Try again.");
-        }        
+        }
         return result;
     }
 
     /**
-     * Performs one calculation by asking the user for two numbers and an operation to perform on those
-     * two numbers.  The numbers, the type of operation and the results of the calculation are displayed.
+     * Performs one calculation by asking the user for two numbers and an operation
+     * to perform on those
+     * two numbers. The numbers, the type of operation and the results of the
+     * calculation are displayed.
      */
-    private static void performOneCalculation()
-    {
+    private static void performOneCalculation() {
         double a = promptForNumber("Enter the first number >");
         double b = promptForNumber("Enter the second number >");
         String operation = getOperation();
@@ -69,67 +66,73 @@ public class Main
     }
 
     /**
-     * Performs the specified operation on the two numbers and returns the result of that operation.
+     * Performs the specified operation on the two numbers and returns the result of
+     * that operation.
      *
-     * @param a         - the first double precision number involved in the operation.
-     * @param b         - the second double precision number involved in the operation.
-     * @param operation - the type of operation such as + (addition), - (subtraction)
+     * @param a         - the first double precision number involved in the
+     *                  operation.
+     * @param b         - the second double precision number involved in the
+     *                  operation.
+     * @param operation - the type of operation such as + (addition), -
+     *                  (subtraction)
      *                  * (multiplication), / (division) or % (modulo).
      * @return
      */
-    private static double performOperation(double a, double b, String operation)
-    {
-        if (operation.equals("+")) return a + b;
-        else if (operation.equals("-")) return a - b;
-        else if (operation.equals("*")) return a * b;
-        else if (operation.equals("/")) return a / b;
-        else if (operation.equals("%")) return a % b;
-        else return Double.NaN;
+    private static double performOperation(double a, double b, String operation) {
+        if (operation.equals("+"))
+            return a + b;
+        else if (operation.equals("-"))
+            return a - b;
+        else if (operation.equals("*"))
+            return a * b;
+        else if (operation.equals("/"))
+            return a / b;
+        else if (operation.equals("%"))
+            return a % b;
+        else
+            return Double.NaN;
     }
 
     /**
-     * @param msg - the message to display as a prompt for getting the desired type of number.
-     *            If an invalid number or something that is not a number is entered, the user
+     * @param msg - the message to display as a prompt for getting the desired type
+     *            of number.
+     *            If an invalid number or something that is not a number is entered,
+     *            the user
      *            is prompted again.
      * @return - the double precision number.
      */
-    private static double promptForNumber(String msg)
-    {
+    private static double promptForNumber(String msg) {
         Scanner kb = new Scanner(System.in);
         double num = Double.NaN;
         System.out.print(msg);
         boolean needValidNumber = true;
-        do
-        {
-            try
-            {
+        do {
+            try {
                 num = Double.parseDouble(kb.nextLine());
                 needValidNumber = false;
-            } catch (NumberFormatException ex)
-            {
+            } catch (NumberFormatException ex) {
                 System.out.println("That's not a number. Try again.");
             }
         } while (needValidNumber);
         return num;
     }
 
-
     /**
-     * Prompts for a valid operation. If an invalid operation is entered, the user is
-     * informed and is asked for a valid operation again.  The process continues until the user
+     * Prompts for a valid operation. If an invalid operation is entered, the user
+     * is
+     * informed and is asked for a valid operation again. The process continues
+     * until the user
      * enters a valid operation choice.
      *
      * @return the valid operation
      */
-    private static String getOperation()
-    {
+    private static String getOperation() {
         Scanner kb = new Scanner(System.in);
         String validOperations = "+-*/%";
         String operation = "";
         boolean waitingForValidOperation = true;
         System.out.println("Valid operations are " + validOperations);
-        do
-        {
+        do {
             System.out.print("What operation do you want to perform?>");
             operation = kb.nextLine();
             if (validOperations.indexOf(operation) >= 0)
@@ -145,9 +148,19 @@ public class Main
     /**
      * Displays the current Java run-time version.
      */
-    private static void displayJavaVersion()
-    {
+    private static void displayJavaVersion() {
         String version = System.getProperty("java.runtime.version");
         System.out.println("java.runtime.version=" + version);
+
+        version = System.getProperty("java.specification.version");
+        System.out.println("java.specification.version=" + version);
+
+        version = System.getProperty("java.runtime.version");
+        System.out.println("java.runtime.version=" + version);
+
+        Runtime.Version runTimeVersion = Runtime.version();
+        System.out.println("RunTime.Version=" + runTimeVersion);
+        System.out.println("RunTime.Version.feature()=" + runTimeVersion.feature()); // major version
+
     }
 }
